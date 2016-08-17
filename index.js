@@ -65,6 +65,10 @@ app.get('/oauth/login', (req, res) => {
 })
 
 app.get('/oauth/callback', (req, res) => {
+	if (req.query.error == 'access_denied') {
+		req.session.error = 'You need to accept the auth, dummy'
+		return res.redirect('/')
+	}
 	if (req.query.state != req.session.state) {
 		req.session.error = 'Wrong OAuth state'
 		return res.redirect('/')

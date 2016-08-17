@@ -25,7 +25,18 @@ html
 			div.login > img {
 				height:100%
 			}
-	body
+			.container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh
+			}
+			.content {
+				max-width: 50%;
+			}
+	body: .container: .content
+		if error
+			img(src="/img/login-error.gif")
 		h1.text-center You find yourself in a weird place
 		.row.text-center: a(href="/oauth/login"): .login
 			img(src="/img/login-left.png")
@@ -34,4 +45,4 @@ html
 				| &nbsp;
 			img(src="/img/login-right.png")
 		if error
-			.container: .row: .col-sm-4.col-sm-offset-4: .alert.alert-danger: strong !{error}
+			.col-sm-8.col-sm-offset-2: .alert.alert-danger.text-center: strong !{error}
