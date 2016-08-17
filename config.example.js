@@ -10,7 +10,12 @@ var config = {
 	},
 	hiddenRoles: [], //roles to hide in the control panel
 	accessRoles: [], //roles with access to the control panel
-	sessionSecret: '' //express session secret
+	sessionSecret: '', //express session secret
+	oauth: {
+		clientID: '', //OAuth Client ID
+		clientSecret: '' //OAuth Client Secret
+	},
+	host: '' //OAuth Host, make sure you add it into the allowed redirects
 }
 
 module.exports = config;
