@@ -185,12 +185,12 @@ app.get('/unassign/:userID/:roleName', (req, res) => {
 
 bot.on('ready', function(event) {
 	bot.setPresence({
-		game: config.game || null
+		game: config.game || undefined
 	})
 	setTimeout(_ => {
 		bot.sendMessage({
 			to: config.notificationChannel,
-			message: "Started new instance at **" + moment().format("DD.MM.YYYY HH:mm:ss") + "**"
+			message: "Started new instance at **" + moment.utc().format("DD.MM.YYYY HH:mm:ss") + " UTC**"
 		})
 	}, 1000)
 	console.log('Logged into %s as %s - %s', "Discord".rainbow, bot.username.blue, bot.id.green);
