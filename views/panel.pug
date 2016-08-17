@@ -11,7 +11,7 @@ html
 			h1 #{bot.username}##{bot.discriminator} is #{bot.presenceStatus}.
 				.pull-right: a.btn.btn-danger(href="/logout") Log Out
 			h4 Logged in as #{user.username}
-			h3 Members of PlaySquad:
+			h3 Members of #{server.name}:
 			table.table.table-bordered
 				thead: tr
 					td Name
@@ -25,11 +25,11 @@ html
 							if member.roles.indexOf(roles.approved)<0
 								a(href="/assign/"+member.id+"/approved").btn.btn-success Approve
 							else
-								a(href="/unassign/"+member.id+"/approved").btn.btn-success Unapprove
 								if member.roles.indexOf(roles.mod)>=0
 									a(href="/unassign/"+member.id+"/mod").btn.btn-warning Demod
 								else if member.roles.indexOf(roles.admin)>=0
 									a(href="/unassign/"+member.id+"/admin").btn.btn-danger Deadmin
 								else
+									a(href="/unassign/"+member.id+"/approved").btn.btn-success Unapprove
 									a(href="/assign/"+member.id+"/mod").btn.btn-warning Mod
 									a(href="/assign/"+member.id+"/admin").btn.btn-danger Admin

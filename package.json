@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async-waterfall": "^0.1.5",
     "colors": "^1.1.2",
     "discord.io": "github:izy521/discord.io",
     "express": "^4.14.0",

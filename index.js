@@ -4,8 +4,6 @@ var session = require('express-session')
 var Discord = require('discord.io');
 var colors = require("colors")
 var moment = require("moment")
-var request = require("request")
-var waterfall = require('async-waterfall');
 var request = require('request');
 
 app.set("view engine", "pug")
@@ -21,19 +19,10 @@ var oauth2 = require('simple-oauth2')({
 	authorizationPath: '/oauth2/authorize'
 });
 
-var authorization_uri = oauth2.authCode.authorizeURL({
-	redirect_uri: 'http://localhost:3000/oauth/callback',
-	scope: 'identify',
-	state: '3(#0/!~'
-});
-
-//bot config
 var bot = new Discord.Client({
 	autorun: true,
 	token: config.botToken
-});
-
-//example message handler
+})
 
 bot.on('message', function(user, userID, channelID, message, event) {
 	if (message.indexOf("|") == 0) {
@@ -66,14 +55,24 @@ app.use(session({
 }))
 
 app.get('/oauth/login', (req, res) => {
+	req.session.state = Math.random().toString(36).substring(7);
+	var authorization_uri = oauth2.authCode.authorizeURL({
+		redirect_uri: config.host + '/oauth/callback',
+		scope: 'identify',
+		state: req.session.state
+	});
 	res.redirect(authorization_uri)
 })
 
 app.get('/oauth/callback', (req, res) => {
+	if (req.query.state != req.session.state) {
+		req.session.error = 'Wrong OAuth state'
+		return res.redirect('/')
+	}
 	var code = req.query.code;
 	oauth2.authCode.getToken({
 		code: code,
-		redirect_uri: 'http://localhost:3000/oauth/callback'
+		redirect_uri: config.host + '/oauth/callback'
 	}, saveToken);
 
 	function saveToken(error, result) {
@@ -171,43 +170,13 @@ app.get('/assign/:userID/:roleName', (req, res) => {
 })
 
 app.get('/unassign/:userID/:roleName', (req, res) => {
-	if (req.params.roleName == 'approved') {
-		waterfall([function(callback) {
-			bot.removeFromRole({
-				serverID: config.mainServerID,
-				userID: req.params.userID,
-				roleID: config.roles.admin
-			}, (err, resp) => {
-				callback()
-			})
-		}, function(callback) {
-			bot.removeFromRole({
-				serverID: config.mainServerID,
-				userID: req.params.userID,
-				roleID: config.roles.mod
-			}, (err, resp) => {
-				callback()
-			})
-		}, function(callback) {
-			bot.removeFromRole({
-				serverID: config.mainServerID,
-				userID: req.params.userID,
-				roleID: config.roles.approved
-			}, (err, resp) => {
-				callback()
-			})
-		}], _ => {
-			res.redirect('/')
-		});
-	} else {
-		bot.removeFromRole({
-			serverID: config.mainServerID,
-			userID: req.params.userID,
-			roleID: config.roles[req.params.roleName]
-		}, (err, resp) => {
-			res.redirect('/')
-		})
-	}
+	bot.removeFromRole({
+		serverID: config.mainServerID,
+		userID: req.params.userID,
+		roleID: config.roles[req.params.roleName]
+	}, (err, resp) => {
+		res.redirect('/')
+	})
 })
 
 bot.on('ready', function(event) {
