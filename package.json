@@ -1,0 +1,24 @@
+{
+  "name": "rabot",
+  "version": "1.0.0",
+  "description": "A Discord and SAML connector",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-waterfall": "^0.1.5",
+    "colors": "^1.1.2",
+    "discord.io": "github:izy521/discord.io",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "moment": "^2.14.1",
+    "pug": "^0.1.0",
+    "request": "^2.74.0",
+    "simple-oauth2": "^0.8.0"
+  },
+  "repository": "https://github.com/sestg/RaBot.git"
+}

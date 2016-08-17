@@ -1,0 +1,37 @@
+html
+	head
+		title Weird Place
+		link(rel="stylesheet" href="/css/bootstrap.min.css")
+		style.
+			div.box {
+				display: inline-block;
+				margin-left: -1px;
+				margin-right: -1px;
+				vertical-align: top;
+				background-color: #7289da;
+				width: auto;
+				height: 46px;
+				line-height: 46px;
+				color: #ffffff;
+				font-family: 'Open Sans', sans-serif;
+				font-size: 20px;
+			}
+			div.box > img {
+				height: 40%
+			}
+			div.login {
+				height: 52.06px
+			}
+			div.login > img {
+				height:100%
+			}
+	body
+		h1.text-center You find yourself in a weird place
+		.row.text-center: a(href="/oauth/login"): .login
+			img(src="/img/login-left.png")
+			.box Login with&nbsp;
+				img(src="/img/login-discord-logo.png")
+				| &nbsp;
+			img(src="/img/login-right.png")
+		if error
+			.container: .row: .col-sm-4.col-sm-offset-4: .alert.alert-danger: strong !{error}
