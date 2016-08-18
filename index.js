@@ -121,12 +121,25 @@ app.get('/oauth/callback', (req, res) => {
 	}
 })
 
+if (config.joinLink) {
+	app.get('/join', (req, res) => {
+		if (typeof config.joinLink === 'string') {
+			res.redirect('http://discord.gg/' + config.joinLink)
+		} else {
+			request('https://discordapp.com/api/servers/' + config.mainServerID + '/widget.json', (err, resp, body) => {
+				res.redirect(JSON.parse(body).instant_invite)
+			})
+		}
+	})
+}
+
 app.use((req, res, next) => {
 	var error = req.session.error || undefined
 	req.session.error = undefined
 	if (!req.session.loggedIn) {
 		res.render('login', {
-			error: error
+			error: error,
+			serverId: config.joinLink ? config.mainServerID : undefined
 		})
 		return;
 	}

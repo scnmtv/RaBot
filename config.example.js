@@ -15,7 +15,8 @@ var config = {
 		clientID: '', //OAuth Client ID
 		clientSecret: '' //OAuth Client Secret
 	},
-	host: '' //OAuth Host, make sure you add it into the allowed redirects
+	host: '', //OAuth Host, make sure you add it into the allowed redirects
+	joinLink: false //Set to true if you have a widget, set to string if you wnat to use a custom invite (still need widget enabled)
 }
 
 module.exports = config;
