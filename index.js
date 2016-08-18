@@ -202,7 +202,10 @@ app.get('/status/:status', (req, res) => {
 
 bot.on('ready', function(event) {
 	bot.setPresence({
-		game: config.game || undefined
+		game: {
+			name: config.game || undefined
+		},
+		type: 0
 	})
 	setTimeout(_ => {
 		bot.sendMessage({
