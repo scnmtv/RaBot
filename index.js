@@ -188,11 +188,19 @@ app.get('/status/:status', (req, res) => {
 	switch (status) {
 		case 'online':
 			bot.setPresence({
+				game: {
+					name: config.game || undefined
+				},
+				type: 0,
 				idle_since: null
 			})
 			break;
 		case 'idle':
 			bot.setPresence({
+				game: {
+					name: config.game || undefined
+				},
+				type: 0,
 				idle_since: Date.now()
 			})
 			break;
