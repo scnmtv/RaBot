@@ -197,11 +197,7 @@ app.get('/status/:status', (req, res) => {
 			break;
 		case 'idle':
 			bot.setPresence({
-				game: {
-					name: config.game || undefined
-				},
-				type: 0,
-				idle_since: Date.now()
+				idle_since: moment().valueOf()
 			})
 			break;
 	}
