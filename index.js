@@ -48,7 +48,7 @@ bot.on('guildCreate', function(server) {
 app.use(session({
 	secret: config.sessionSecret,
 	cookie: {
-		maxAge: 60000
+		maxAge: 15 * 60 * 1000
 	},
 	resave: true,
 	saveUninitialized: true
