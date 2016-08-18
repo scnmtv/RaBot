@@ -1,0 +1,69 @@
+.btn-discord {
+  color: #fff;
+  background-color: #7289da;
+  border-color: #657CCD;
+}
+.btn-discord:focus,
+.btn-discord.focus {
+  color: #fff;
+  background-color: #4a67cf;
+  border-color: #2c4087;
+}
+.btn-discord:hover {
+  color: #fff;
+  background-color: #4a67cf;
+  border-color: #3c58b9;
+}
+.btn-discord:active,
+.btn-discord.active,
+.open > .dropdown-toggle.btn-discord {
+  color: #fff;
+  background-color: #4a67cf;
+  border-color: #3c58b9;
+}
+.btn-discord:active:hover,
+.btn-discord.active:hover,
+.open > .dropdown-toggle.btn-discord:hover,
+.btn-discord:active:focus,
+.btn-discord.active:focus,
+.open > .dropdown-toggle.btn-discord:focus,
+.btn-discord:active.focus,
+.btn-discord.active.focus,
+.open > .dropdown-toggle.btn-discord.focus {
+  color: #fff;
+  background-color: #3353c2;
+  border-color: #2c4087;
+}
+.btn-discord:active,
+.btn-discord.active,
+.open > .dropdown-toggle.btn-discord {
+  background-image: none;
+}
+.btn-discord.disabled:hover,
+.btn-discord[disabled]:hover,
+fieldset[disabled] .btn-discord:hover,
+.btn-discord.disabled:focus,
+.btn-discord[disabled]:focus,
+fieldset[disabled] .btn-discord:focus,
+.btn-discord.disabled.focus,
+.btn-discord[disabled].focus,
+fieldset[disabled] .btn-discord.focus {
+  background-color: #7289da;
+  border-color: #657CCD;
+}
+.btn-discord .badge {
+  color: #7289da;
+  background-color: #fff;
+}
+.btn-discord img.logo {
+  max-height: 3rem;
+}
+.center-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.center-container .center-content {
+  max-width: 50%;
+}

@@ -2,48 +2,13 @@ html
 	head
 		title Weird Place
 		link(rel="stylesheet" href="/css/bootstrap.min.css")
+		link(rel="stylesheet" href="/css/custom.css")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
-		style.
-			div.box {
-				display: inline-block;
-				margin-left: -1px;
-				margin-right: -1px;
-				vertical-align: top;
-				background-color: #7289da;
-				width: auto;
-				height: 46px;
-				line-height: 46px;
-				color: #ffffff;
-				font-family: 'Open Sans', sans-serif;
-				font-size: 20px;
-			}
-			div.box > img {
-				height: 40%
-			}
-			div.login {
-				height: 52.06px
-			}
-			div.login > img {
-				height:100%
-			}
-			.container {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				height: 100vh
-			}
-			.content {
-				max-width: 50%;
-			}
-	body: .container: .content
+	body: .center-container.container: .center-content
 		if error
 			img(src="/img/login-error.gif")
 		h1.text-center You find yourself in a weird place
-		.row.text-center: a(href="/oauth/login"): .login
-			img(src="/img/login-left.png")
-			.box Login with&nbsp;
-				img(src="/img/login-discord-logo.png")
-				| &nbsp;
-			img(src="/img/login-right.png")
+		.row.text-center: a.btn.btn-lg.btn-discord(href="/oauth/login") Login with&nbsp;
+			img.logo(src="/img/login-discord-logo.png")
 		if error
 			.col-sm-8.col-sm-offset-2: .alert.alert-danger.text-center: strong !{error}
