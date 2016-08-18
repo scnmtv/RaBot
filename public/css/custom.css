@@ -1,25 +1,25 @@
 .btn-discord {
   color: #fff;
   background-color: #7289da;
-  border-color: #657CCD;
+  border-color: #5e78d5;
 }
 .btn-discord:focus,
 .btn-discord.focus {
   color: #fff;
   background-color: #4a67cf;
-  border-color: #2c4087;
+  border-color: #253c8e;
 }
 .btn-discord:hover {
   color: #fff;
   background-color: #4a67cf;
-  border-color: #3c58b9;
+  border-color: #3353c2;
 }
 .btn-discord:active,
 .btn-discord.active,
 .open > .dropdown-toggle.btn-discord {
   color: #fff;
   background-color: #4a67cf;
-  border-color: #3c58b9;
+  border-color: #3353c2;
 }
 .btn-discord:active:hover,
 .btn-discord.active:hover,
@@ -32,7 +32,7 @@
 .open > .dropdown-toggle.btn-discord.focus {
   color: #fff;
   background-color: #3353c2;
-  border-color: #2c4087;
+  border-color: #253c8e;
 }
 .btn-discord:active,
 .btn-discord.active,
@@ -49,7 +49,7 @@ fieldset[disabled] .btn-discord:focus,
 .btn-discord[disabled].focus,
 fieldset[disabled] .btn-discord.focus {
   background-color: #7289da;
-  border-color: #657CCD;
+  border-color: #5e78d5;
 }
 .btn-discord .badge {
   color: #7289da;

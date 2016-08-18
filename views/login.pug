@@ -8,7 +8,7 @@ html
 		if error
 			img(src="/img/login-error.gif")
 		h1.text-center You find yourself in a weird place
-		.row.text-center: a.btn.btn-lg.btn-discord(href="/oauth/login") Login with&nbsp;
+		.row.text-center: .form-group: a.btn.btn-lg.btn-discord(href="/oauth/login") Login with&nbsp;
 			img.logo(src="/img/login-discord-logo.png")
 		if error
-			.col-sm-8.col-sm-offset-2: .alert.alert-danger.text-center: strong !{error}
+			.row: .col-sm-8.col-sm-offset-2: .alert.alert-danger.text-center: strong !{error}

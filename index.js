@@ -66,7 +66,7 @@ app.get('/oauth/login', (req, res) => {
 
 app.get('/oauth/callback', (req, res) => {
 	if (req.query.error == 'access_denied') {
-		req.session.error = 'You need to accept the auth, dummy'
+		req.session.error = 'You need to accept the auth, baka'
 		return res.redirect('/')
 	}
 	if (req.query.state != req.session.state) {
@@ -181,6 +181,23 @@ app.get('/unassign/:userID/:roleName', (req, res) => {
 	}, (err, resp) => {
 		res.redirect('/')
 	})
+})
+
+app.get('/status/:status', (req, res) => {
+	var status = req.params.status
+	switch (status) {
+		case 'online':
+			bot.setPresence({
+				idle_since: null
+			})
+			break;
+		case 'idle':
+			bot.setPresence({
+				idle_since: Date.now()
+			})
+			break;
+	}
+	res.redirect('/')
 })
 
 bot.on('ready', function(event) {

@@ -1,7 +1,21 @@
+mixin buttons()
+	if member.roles.indexOf(roles.approved)<0
+		a(href="/assign/"+member.id+"/approved").btn.btn-success Approve
+	else
+		if member.roles.indexOf(roles.mod)>=0
+			a(href="/unassign/"+member.id+"/mod").btn.btn-warning Demod
+		else if member.roles.indexOf(roles.admin)>=0
+			a(href="/unassign/"+member.id+"/admin").btn.btn-danger Deadmin
+		else
+			a(href="/unassign/"+member.id+"/approved").btn.btn-success Unapprove
+			a(href="/assign/"+member.id+"/mod").btn.btn-warning Mod
+			a(href="/assign/"+member.id+"/admin").btn.btn-danger Admin
+
 html
 	head
 		title=bot.username
 		link(rel="stylesheet" href="/css/bootstrap.min.css")
+		link(rel="stylesheet" href="/css/custom.css")
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		style.
 			.table > tbody > tr > td {
@@ -9,28 +23,30 @@ html
 			}
 	body
 		.container
-			h1 #{bot.username}##{bot.discriminator} is #{bot.presenceStatus}.
+			h1 #{bot.username}##{bot.discriminator} is&nbsp;
+				case bot.presenceStatus
+					when 'online'
+						span.text-success online
+					when 'idle'
+						span.text-warning idle
+					default
+						span.text-info unknown
+				|.
 				.pull-right: a.btn.btn-danger(href="/logout") Log Out
-			h4 Logged in as #{user.username}
+			h4 Logged in as #{user.username}##{user.discriminator}
+			.btn-group
+				a.btn.btn-success(href="/status/online") Online
+				a.btn.btn-warning(href="/status/idle") Idle
 			h3 Members of #{server.name}:
-			table.table.table-bordered
+			.col-sm-6.col-sm-offset-3: table.table.table-hover
 				thead: tr
 					td Name
-					td ID
 					td
 				tbody: for member in members
 					tr(class={warning: member.roles.indexOf(roles.admin)>=0 || member.roles.indexOf(roles.mod)>=0})
-						td=member.username
-						td=member.id
-						td: .btn-group
-							if member.roles.indexOf(roles.approved)<0
-								a(href="/assign/"+member.id+"/approved").btn.btn-success Approve
-							else
-								if member.roles.indexOf(roles.mod)>=0
-									a(href="/unassign/"+member.id+"/mod").btn.btn-warning Demod
-								else if member.roles.indexOf(roles.admin)>=0
-									a(href="/unassign/"+member.id+"/admin").btn.btn-danger Deadmin
-								else
-									a(href="/unassign/"+member.id+"/approved").btn.btn-success Unapprove
-									a(href="/assign/"+member.id+"/mod").btn.btn-warning Mod
-									a(href="/assign/"+member.id+"/admin").btn.btn-danger Admin
+						td
+							strong=member.username
+							="#"+member.discriminator
+						td: .pull-right
+							.btn-group.hidden-xs: +buttons()
+							.btn-group-vertical.visible-xs: +buttons()
