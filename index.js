@@ -108,11 +108,19 @@ app.get('/oauth/callback', (req, res) => {
 						} else {
 							req.session.error = 'Two-Factor Auth is required for this part of the admin, please check <a href="https://support.discordapp.com/hc/en-us/articles/219576828-Setting-up-Two-Factor-Authentication">here</a> for help.'
 						}
+						bot.sendMessage({
+							to: config.notificationChannel,
+							message: "**"+req.session.user.username+"#"+req.session.user.discriminator+"** successfully logged in"
+						})
 						return res.redirect('/')
 						break
 					}
 				}
 				if (!req.session.loggedIn) {
+					bot.sendMessage({
+						to: config.notificationChannel,
+						message: "**"+req.session.user.username+"#"+req.session.user.discriminator+"** doesn't have access but tried to login!!!!"
+					})
 					req.session.error = 'Nuh uh, you are not a chosen one'
 					res.redirect('/')
 				}
