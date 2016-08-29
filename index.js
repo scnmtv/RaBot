@@ -29,6 +29,15 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		var command = message.substr(1)
 		console.log(user.red, userID.green, channelID.yellow, command.cyan)
 		switch (command) {
+			case "ding":
+				if (config.ring.chimeId) {
+					request.post('https://api.ring.com/clients_api/chimes/' + config.ring.chimeId + '/play_sound?api_version=8&auth_token=' + config.ring.authToken)
+					bot.sendMessage({
+						to: channelID,
+						message: "The owner's bells are ringing."
+					})
+				}
+				break
 			case "help":
 				bot.sendMessage({
 					to: channelID,
@@ -110,7 +119,7 @@ app.get('/oauth/callback', (req, res) => {
 						}
 						bot.sendMessage({
 							to: config.notificationChannel,
-							message: "**"+req.session.user.username+"#"+req.session.user.discriminator+"** successfully logged in"
+							message: "**" + req.session.user.username + "#" + req.session.user.discriminator + "** successfully logged in"
 						})
 						return res.redirect('/')
 						break
@@ -119,7 +128,7 @@ app.get('/oauth/callback', (req, res) => {
 				if (!req.session.loggedIn) {
 					bot.sendMessage({
 						to: config.notificationChannel,
-						message: "**"+req.session.user.username+"#"+req.session.user.discriminator+"** doesn't have access but tried to login!!!!"
+						message: "**" + req.session.user.username + "#" + req.session.user.discriminator + "** doesn't have access but tried to login!!!!"
 					})
 					req.session.error = 'Nuh uh, you are not a chosen one'
 					res.redirect('/')
