@@ -31,6 +31,12 @@ bot.on('message', function(user, userID, channelID, message, event) {
 		switch (command) {
 			case "ding":
 				if (config.ring.chimeId) {
+					if (config.ring.users.indexOf(userID) < 0) {
+						return bot.sendMessage({
+							to: channelID,
+							message: "Nope, you don't"
+						}) 
+					};
 					request.post('https://api.ring.com/clients_api/chimes/' + config.ring.chimeId + '/play_sound?api_version=8&auth_token=' + config.ring.authToken)
 					bot.sendMessage({
 						to: channelID,
