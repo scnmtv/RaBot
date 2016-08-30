@@ -263,8 +263,10 @@ app.listen(port, _ => {
 })
 
 bot.on('disconnect', function(errMsg, code) {
-	console.log("Bot disconnected:".red, errMsg ? errMsg.cyan : 'Unknown Error')
+	console.log("Bot disconnected:".red, errMsg ? errMsg.cyan : code || 'Unknown Error')
 	if (code == 1001) {
 		bot.connect();
+	} else {
+		process.exit(1)
 	}
 });
